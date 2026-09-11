@@ -74,6 +74,3 @@ const OLDER_VERSIONS_SHOWN = 5;
 
 // 화면에 날짜를 찍을 때 쓰는 시간대. OBS 는 UTC 로 기록합니다.
 const DISPLAY_TZ = 'Asia/Seoul';
-
-// 개발 현황 선택지. 값은 코드로 저장하고 라벨만 언어별로 꺼내 씁니다.
-const DEV_STATUSES = ['done', 'wip', 'hold', 'deprecated'];

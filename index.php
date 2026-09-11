@@ -186,8 +186,6 @@ try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') 
                     <?php endif; ?>
                 </td>
 
-                <td><span class="st st-<?= e($t['dev_status']) ?>"><?= e(status_label($lang, $t['dev_status'])) ?></span></td>
-
                 <?php if ($canEdit): ?>
                     <td class="actions">
                         <button class="row-btn" type="button" data-edit="<?= e($t['id']) ?>"><?= e(tr($lang, 'edit')) ?></button>

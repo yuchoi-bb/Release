@@ -61,9 +61,6 @@ function tool_normalize(array $t): array
         $out[$f] = $links;
     }
 
-    $status = (string)($t['dev_status'] ?? 'done');
-    $out['dev_status'] = in_array($status, DEV_STATUSES, true) ? $status : 'done';
-
     return $out;
 }
 

@@ -102,15 +102,14 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
       "product_supported": ["PM1743"],
       "manual":        [{ "label": "Manual", "url": "http://..." }],
       "remarks_text":  "Emergency Fix",
-      "remarks_links": [{ "label": "Git Repo", "url": "https://..." }],
-      "dev_status": "done"
+      "remarks_links": [{ "label": "Git Repo", "url": "https://..." }]
     }
   ]
 }
 ```
 
 - `id` 는 이력 추적용 불변 키입니다. 도구명이 바뀌어도 그대로 둡니다
-- `dev_status` 는 `done` / `wip` / `hold` / `deprecated`
+
 - `remarks_text` 는 짧은 문구, `remarks_links` 는 링크 목록입니다 — 화면에서는
   같은 "비고" 칸에 위아래로 쌓여 보입니다
 

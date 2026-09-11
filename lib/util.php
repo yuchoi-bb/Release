@@ -103,7 +103,6 @@ const I18N = [
         'f_prefix'       => 'OBS prefix',
         'f_os'           => 'OS / ARCH supported',
         'f_product'      => 'Product supported',
-        'f_status'       => 'Dev status',
         'f_manual'       => 'Manual links',
         'f_rm_text'      => 'Remarks — note',
         'f_rm_links'     => 'Remarks — links',
@@ -115,12 +114,8 @@ const I18N = [
         'ph_note'        => 'e.g. Emergency Fix',
         'modal_edit'     => 'Edit tool — %s',
         'modal_add'      => 'Add tool',
-        'st_done'        => 'Done',
-        'st_wip'         => 'In progress',
-        'st_hold'        => 'On hold',
-        'st_deprecated'  => 'Deprecated',
         'headers'        => ['Tool', 'Update', 'OS / ARCH Supported', 'Product Supported',
-                             'Tool link', 'Verification Report', 'Manual', 'Remarks', 'Dev Status'],
+                             'Tool link', 'Verification Report', 'Manual', 'Remarks'],
     ],
     'ko' => [
         'login_title'    => '관리자 로그인',
@@ -162,7 +157,6 @@ const I18N = [
         'f_prefix'       => 'OBS Prefix',
         'f_os'           => '지원 OS / 아키텍처',
         'f_product'      => '지원 제품군',
-        'f_status'       => '개발 현황',
         'f_manual'       => '매뉴얼 링크',
         'f_rm_text'      => '비고 — 문구',
         'f_rm_links'     => '비고 — 링크',
@@ -174,12 +168,8 @@ const I18N = [
         'ph_note'        => '예: Emergency Fix',
         'modal_edit'     => '도구 수정 — %s',
         'modal_add'      => '도구 추가',
-        'st_done'        => '완료',
-        'st_wip'         => '진행중',
-        'st_hold'        => '보류',
-        'st_deprecated'  => '지원 종료',
         'headers'        => ['도구명', '업데이트', '지원 OS / 아키텍처', '지원 제품군',
-                             '도구 링크', '검증 리포트', '매뉴얼', '비고', '개발 현황'],
+                             '도구 링크', '검증 리포트', '매뉴얼', '비고'],
     ],
 ];
 
@@ -201,11 +191,6 @@ function tr(string $lang, string $key, ...$args): string
         return $key;
     }
     return $args ? vsprintf($s, $args) : $s;
-}
-
-function status_label(string $lang, string $status): string
-{
-    return tr($lang, 'st_' . $status);
 }
 
 /**

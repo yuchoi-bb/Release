@@ -142,7 +142,6 @@
         form.elements.os_supported.value = tool ? (tool.os_supported || []).join('\n') : '';
         form.elements.product_supported.value = tool ? (tool.product_supported || []).join('\n') : '';
         form.elements.remarks_text.value = tool ? (tool.remarks_text || '') : '';
-        form.elements.dev_status.value = tool ? tool.dev_status : 'done';
         fillLinkset('manual', tool ? tool.manual : []);
         fillLinkset('remarks_links', tool ? tool.remarks_links : []);
 
@@ -205,7 +204,6 @@
                 os_supported: splitLines(form.elements.os_supported.value),
                 product_supported: splitLines(form.elements.product_supported.value),
                 remarks_text: form.elements.remarks_text.value.trim(),
-                dev_status: form.elements.dev_status.value,
                 manual: readLinkset('manual'),
                 remarks_links: readLinkset('remarks_links')
             }

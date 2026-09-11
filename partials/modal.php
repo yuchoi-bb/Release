@@ -26,15 +26,7 @@ declare(strict_types=1);
         <textarea id="f-product" name="product_supported" rows="2" placeholder="<?= e(tr($lang, 'ph_multi')) ?>"></textarea>
       </div>
 
-      <div class="fld">
-        <label for="f-status"><?= e(tr($lang, 'f_status')) ?></label>
-        <select id="f-status" name="dev_status">
-          <?php foreach (DEV_STATUSES as $s): ?>
-            <option value="<?= e($s) ?>"><?= e(status_label($lang, $s)) ?></option>
-          <?php endforeach; ?>
-        </select>
-      </div>
-      <div class="fld">
+      <div class="fld full">
         <label for="f-note"><?= e(tr($lang, 'f_rm_text')) ?></label>
         <input id="f-note" name="remarks_text" maxlength="120" placeholder="<?= e(tr($lang, 'ph_note')) ?>">
       </div>

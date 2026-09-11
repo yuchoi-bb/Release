@@ -148,11 +148,6 @@ tbody tr:hover { background:var(--hover); }
 .older-list a.view-all { color:var(--accent); }
 
 .rm-text { color:var(--orange); font-weight:500; margin-bottom:4px; white-space:normal; }
-.st { padding:3px 9px; border-radius:99px; font:700 9.5px var(--font); text-transform:uppercase; }
-.st-done { background:var(--green-bg); color:var(--green); }
-.st-wip, .st-hold { background:var(--amber-bg); color:var(--amber); }
-.st-deprecated { background:var(--red-bg); color:var(--red); }
-
 td.actions { white-space:nowrap; }
 .row-btn {
     background:none; border:1px solid var(--border); color:var(--tx-muted);
