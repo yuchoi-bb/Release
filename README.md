@@ -160,28 +160,38 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 
 ## 예전 tools.json 옮기기
 
-릴리즈·에셋·검증 상태를 파일에 직접 적던 예전 구조는 그대로 쓸 수 없습니다.
-`id` 가 없어 화면에서 수정·삭제가 동작하지 않고, 검증도 통과하지 못합니다.
+예전 파일은 그대로 쓸 수 없습니다. `id` 가 없어 화면에서 수정·삭제가 동작하지
+않고, 검증도 통과하지 못합니다.
 
 ```bash
 node scripts/migrate.mjs 예전파일.json data/tools.json
 node scripts/validate.mjs
 ```
 
-옮겨지는 것과 아닌 것:
+두 가지 예전 형식을 도구마다 알아서 구분합니다. 이미 현재 구조인 파일을 넣어도
+안전하고, 두 번 돌려도 결과가 같습니다.
 
 | 예전 필드 | 결과 |
 |---|---|
-| `tool`, `obs_prefix`, `os_supported` | 그대로 |
-| `repo_url` | `remarks_links` 의 "Git Repo" 링크로 |
-| `docs_url` | `manual` 의 "Manual" 링크로 (비어 있으면 생략) |
+| `tool`, `obs_prefix`, `os_supported`, `product_supported` | 그대로 (공백만 다듬음) |
+| `remarks` (링크 배열) | `remarks_links` 로 |
+| `manual` | 그대로 |
+| `repo_url` / `docs_url` (릴리즈 형식) | `remarks_links` / `manual` 의 링크로 |
 | 최신 릴리즈의 `notes` | `remarks_text` 로 |
 | (없음) | `id` 를 도구명에서 만들어 붙입니다 |
 | `releases[]` (버전·에셋·검증) | **옮기지 않습니다** — OBS 에서 가져옵니다 |
 | `hub`, `summary`, `category`, `tags`, `maintainer` | **옮기지 않습니다** — 표에 자리가 없습니다 |
 
-`product_supported` 는 예전 구조에 없던 항목이라 비어 있습니다. 표에서 채우세요.
-옮기지 않은 필드는 실행할 때 목록으로 알려줍니다.
+자동으로 손보는 것:
+
+- 라벨 앞의 `*` 불릿을 뗍니다. 페이지가 불릿을 직접 그리므로 두 번 찍힙니다
+- URL 이 없거나 `http`/`https` 가 아닌 링크는 뺍니다 (스키마가 거부합니다)
+- 라벨과 URL 이 똑같은 중복 링크는 하나만 남깁니다
+
+값을 고치지 않고 알려만 주는 것 — `"Window"` 처럼 보이는 오타, `product_supported`
+안의 괄호, 비어 있는 `obs_prefix`. 의도한 값일 수 있어 판단은 맡깁니다.
+
+옮기지 않은 필드와 손본 내용은 실행할 때 모두 출력합니다.
 
 ## 검증
 
