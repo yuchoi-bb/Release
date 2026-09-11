@@ -2,17 +2,21 @@
 // =============================================================================
 // 예전 tools.json 을 현재 구조로 바꿉니다. 한 번만 쓰는 스크립트입니다.
 //
-//   node scripts/migrate.mjs 예전파일.json > data/tools.json
+//   node scripts/migrate.mjs 예전파일.json data/tools.json
+//
+// 출력 파일을 인자로 주면 변환에 성공했을 때만 씁니다. `>` 리다이렉션은 명령이
+// 실패해도 대상 파일을 먼저 비우기 때문에, 덮어쓸 때는 인자 쪽을 쓰세요.
 //
 // 예전 구조는 릴리즈와 에셋을 파일에 직접 적었지만, 지금은 그 정보를 OBS 에서
 // obs_prefix 로 가져오므로 옮기지 않습니다. 옮기지 않은 필드는 stderr 에
 // 알려주므로, 필요한 것이 있으면 표에서 직접 채워 넣으시면 됩니다.
 // =============================================================================
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 
-const input = process.argv[2];
+const [input, output] = process.argv.slice(2);
 if (!input) {
-  console.error('사용법: node scripts/migrate.mjs 예전파일.json > data/tools.json');
+  console.error('사용법: node scripts/migrate.mjs 예전파일.json [출력파일.json]');
+  console.error('  출력 파일을 주면 성공했을 때만 씁니다. 생략하면 표준출력으로 내보냅니다.');
   process.exit(1);
 }
 
@@ -67,13 +71,20 @@ const tools = (old.tools ?? []).map((t) => {
 
 if (old.hub) note('hub (name·tagline·description·download_base)', '파일 전체');
 
-process.stdout.write(JSON.stringify({
+const json = JSON.stringify({
   schema_version: 1,
   updated_at: new Date().toISOString().replace(/\.\d{3}Z$/, '+00:00'),
   tools,
-}, null, 2) + '\n');
+}, null, 2) + '\n';
 
-console.error(`도구 ${tools.length}개를 옮겼습니다.`);
+// 여기까지 왔으면 변환이 끝났으므로, 이제 써도 원본을 잃지 않습니다.
+if (output) {
+  writeFileSync(output, json);
+  console.error(`${output} 에 썼습니다. 도구 ${tools.length}개.`);
+} else {
+  process.stdout.write(json);
+  console.error(`도구 ${tools.length}개를 옮겼습니다.`);
+}
 if (dropped.size > 0) {
   console.error('\n옮기지 않은 필드 (지금 구조에 자리가 없습니다):');
   for (const [field, wheres] of dropped) {

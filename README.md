@@ -164,7 +164,7 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 `id` 가 없어 화면에서 수정·삭제가 동작하지 않고, 검증도 통과하지 못합니다.
 
 ```bash
-node scripts/migrate.mjs 예전파일.json > data/tools.json
+node scripts/migrate.mjs 예전파일.json data/tools.json
 node scripts/validate.mjs
 ```
 
