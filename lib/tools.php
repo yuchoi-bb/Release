@@ -111,10 +111,15 @@ function tools_validate(array $tools): array
             $prefixes[$t['obs_prefix']][] = $where;
         }
 
+        // 스키마(schema/tools.schema.json)가 링크에 url 을 요구합니다.
+        // 여기서 막지 않으면 화면에서 저장한 파일이 CI 검증에서 떨어집니다.
         foreach (TOOL_LINK_FIELDS as $f) {
             foreach ($t[$f] as $l) {
-                if ($l['url'] !== '' && safe_url($l['url']) === null) {
-                    $errors[] = "$where: '{$l['label']}' 의 URL 은 http 또는 https 로 시작해야 합니다.";
+                $name = $l['label'] !== '' ? $l['label'] : '(라벨 없음)';
+                if ($l['url'] === '') {
+                    $errors[] = "$where: '$name' 의 URL 이 비어 있습니다.";
+                } elseif (safe_url($l['url']) === null) {
+                    $errors[] = "$where: '$name' 의 URL 은 http 또는 https 로 시작해야 합니다.";
                 }
             }
         }

@@ -108,7 +108,13 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 }
 ```
 
+정식 정의는 `schema/tools.schema.json` 입니다.
+
 - `id` 는 이력 추적용 불변 키입니다. 도구명이 바뀌어도 그대로 둡니다
+- 링크는 `url` 이 필수이고 `http`/`https` 만 허용합니다. `label` 은 비우면
+  URL 이 그대로 표시됩니다
+- **버전·다운로드 링크·검증 리포트는 적지 않습니다.** OBS 파일을 `obs_prefix`
+  로 매칭해 페이지가 자동으로 채웁니다
 
 - `remarks_text` 는 짧은 문구, `remarks_links` 는 링크 목록입니다 — 화면에서는
   같은 "비고" 칸에 위아래로 쌓여 보입니다
@@ -151,6 +157,36 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 - 쓰기는 `flock` 으로 직렬화하고, 임시 파일에 쓴 뒤 바꿔치기합니다
 - 모든 변경은 `data/tools.history.jsonl` 에 한 줄씩 쌓입니다. 각 줄에 저장
   직전·직후 전체 내용이 들어 있어, 그 줄을 `tools.json` 으로 되돌려 쓰면 복구됩니다
+
+## 검증
+
+`tools.json` 이 스키마를 지키는지 확인합니다. 의존성 없이 Node 만 있으면 됩니다.
+
+```bash
+node scripts/validate.mjs
+```
+
+- 규칙은 `schema/tools.schema.json` 한 곳에서 관리하고, 검증기가 그 파일을 읽어
+  검사합니다
+- 스키마로 표현할 수 없는 것은 따로 봅니다 — `id`·`obs_prefix` 중복, 프리픽스가
+  서로의 앞부분인 경우, 링크 URL 스킴
+- `data/obs_cache.json` 이 있으면 **OBS 와 대조**합니다
+  - 걸리는 파일이 없는 `obs_prefix` → 경고 (표에서 빈칸으로 보입니다)
+  - 어느 도구에도 안 걸리는 OBS 파일 → 경고 (**등록이 빠진 산출물**)
+- 오류가 있으면 종료 코드 1 로 끝나고, 경고만 있으면 0 입니다
+
+`lib/tools.php` 의 `tools_validate()` 가 같은 규칙을 봅니다. 화면에서 저장한
+파일도 이 검사를 통과합니다.
+
+`.github/workflows/validate.yml` 이 `data/tools.json`·`schema/`·`scripts/` 가
+바뀔 때 이 검증과 PHP 문법 검사를 돌립니다.
+
+`data/` 를 웹 루트 밖으로 옮겼다면 경로를 알려주세요.
+
+```bash
+TOOLS_JSON=/var/toolhub-data/tools.json OBS_CACHE=/var/toolhub-data/obs_cache.json \
+  node scripts/validate.mjs
+```
 
 ## 로컬에서 띄우기
 

@@ -1,0 +1,28 @@
+name: validate
+
+on:
+  push:
+    paths: ['data/tools.json', 'schema/**', 'scripts/**', '.github/workflows/validate.yml']
+  pull_request:
+    paths: ['data/tools.json', 'schema/**', 'scripts/**', '.github/workflows/validate.yml']
+  workflow_dispatch:
+
+jobs:
+  tools-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      # 의존성이 없으므로 install 단계가 없습니다.
+      - run: node scripts/validate.mjs
+
+  php-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - run: find . -name '*.php' -print0 | xargs -0 -n1 php -l
