@@ -158,6 +158,31 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 - 모든 변경은 `data/tools.history.jsonl` 에 한 줄씩 쌓입니다. 각 줄에 저장
   직전·직후 전체 내용이 들어 있어, 그 줄을 `tools.json` 으로 되돌려 쓰면 복구됩니다
 
+## 예전 tools.json 옮기기
+
+릴리즈·에셋·검증 상태를 파일에 직접 적던 예전 구조는 그대로 쓸 수 없습니다.
+`id` 가 없어 화면에서 수정·삭제가 동작하지 않고, 검증도 통과하지 못합니다.
+
+```bash
+node scripts/migrate.mjs 예전파일.json > data/tools.json
+node scripts/validate.mjs
+```
+
+옮겨지는 것과 아닌 것:
+
+| 예전 필드 | 결과 |
+|---|---|
+| `tool`, `obs_prefix`, `os_supported` | 그대로 |
+| `repo_url` | `remarks_links` 의 "Git Repo" 링크로 |
+| `docs_url` | `manual` 의 "Manual" 링크로 (비어 있으면 생략) |
+| 최신 릴리즈의 `notes` | `remarks_text` 로 |
+| (없음) | `id` 를 도구명에서 만들어 붙입니다 |
+| `releases[]` (버전·에셋·검증) | **옮기지 않습니다** — OBS 에서 가져옵니다 |
+| `hub`, `summary`, `category`, `tags`, `maintainer` | **옮기지 않습니다** — 표에 자리가 없습니다 |
+
+`product_supported` 는 예전 구조에 없던 항목이라 비어 있습니다. 표에서 채우세요.
+옮기지 않은 필드는 실행할 때 목록으로 알려줍니다.
+
 ## 검증
 
 `tools.json` 이 스키마를 지키는지 확인합니다. 의존성 없이 Node 만 있으면 됩니다.
