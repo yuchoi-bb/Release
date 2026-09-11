@@ -1,0 +1,69 @@
+{
+  "$schema": "./schema/tools.schema.json",
+  "schema_version": "1.0.0",
+  "hub": {
+    "name": "ToolHub Release",
+    "tagline": "검증된 바이너리 배포 페이지",
+    "description": "ToolHub에서 사용하는 도구들의 검증 완료된 바이너리를 배포합니다. 모든 파일은 SHA-256 체크섬으로 무결성을 확인할 수 있습니다.",
+    "download_base": "https://github.com/yuchoi-bb/Release/releases/download",
+    "updated_at": "2026-09-11"
+  },
+  "tools": [
+    {
+      "tool": "NWin",
+      "obs_prefix": "NWin_",
+      "os_supported": ["Windows (x64, x86, arm64)"],
+      "summary": "Windows 환경용 네트워크 진단 도구",
+      "category": "network",
+      "maintainer": "yuchoi-bb",
+      "repo_url": "https://github.com/yuchoi-bb/Release",
+      "docs_url": "",
+      "tags": ["network", "windows", "diagnostics"],
+      "releases": [
+        {
+          "version": "1.0.0",
+          "channel": "stable",
+          "released_at": "2026-09-01",
+          "notes": "최초 검증 릴리스.",
+          "notes_url": "",
+          "verification": {
+            "status": "verified",
+            "verified_at": "2026-09-01",
+            "verified_by": "yuchoi-bb",
+            "method": "sha256",
+            "ticket": ""
+          },
+          "assets": [
+            {
+              "file": "NWin_1.0.0_windows_x64.zip",
+              "os": "windows",
+              "arch": "x64",
+              "size": 0,
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "url": "",
+              "sig_url": ""
+            },
+            {
+              "file": "NWin_1.0.0_windows_x86.zip",
+              "os": "windows",
+              "arch": "x86",
+              "size": 0,
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "url": "",
+              "sig_url": ""
+            },
+            {
+              "file": "NWin_1.0.0_windows_arm64.zip",
+              "os": "windows",
+              "arch": "arm64",
+              "size": 0,
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "url": "",
+              "sig_url": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToolHub Release</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232f6feb'/%3E%3Cpath d='M4 8.4l2.6 2.6L12 5.6' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#tools">본문으로 건너뛰기</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brand">
+        <h1 id="hub-name">ToolHub Release</h1>
+        <p id="hub-tagline" class="tagline"></p>
+      </div>
+      <p id="hub-desc" class="desc"></p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="controls" aria-label="검색 및 필터">
+      <div class="search">
+        <input id="q" type="search" placeholder="도구 이름, 태그, 설명 검색…" autocomplete="off"
+               aria-label="도구 검색">
+      </div>
+      <div class="filters">
+        <fieldset class="chips">
+          <legend>OS</legend>
+          <div id="os-filters" class="chip-row"></div>
+        </fieldset>
+        <fieldset class="chips">
+          <legend>채널</legend>
+          <div id="channel-filters" class="chip-row"></div>
+        </fieldset>
+        <label class="toggle">
+          <input id="verified-only" type="checkbox">
+          <span>검증 완료만</span>
+        </label>
+      </div>
+      <p id="result-count" class="result-count" role="status"></p>
+    </section>
+
+    <main id="tools" class="tool-list" aria-live="polite"></main>
+
+    <p id="empty" class="empty" hidden>조건에 맞는 도구가 없습니다.</p>
+    <p id="error" class="error-box" hidden></p>
+  </div>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>모든 바이너리는 SHA-256 체크섬으로 무결성을 확인하세요. 체크섬이 일치하지 않으면 실행하지 마세요.</p>
+      <p id="hub-updated" class="muted"></p>
+    </div>
+  </footer>
+
+  <script src="./assets/app.js" type="module"></script>
+</body>
+</html>
