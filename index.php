@@ -28,7 +28,7 @@ $alerts = array_values(array_filter([$toolsData['error'], $obsData['error']]));
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToolHub <?= $lang === 'ko' ? '릴리즈 페이지' : 'Release Page' ?></title>
-<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="<?= e(base_path()) ?>assets/app.css">
 <script>
 // 첫 페인트 전에 테마를 적용해 흰 화면이 번쩍이지 않게 합니다.
 try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') || 'light'; } catch (e) {}
@@ -50,15 +50,15 @@ try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') 
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
             <span id="themeLabel"><?= e(tr($lang, 'theme_light')) ?></span>
         </button>
-        <a class="hbtn" href="?lang=<?= $lang === 'ko' ? 'en' : 'ko' ?>"><?= e(tr($lang, 'lang_btn')) ?></a>
+        <a class="hbtn" href="<?= e(base_path()) ?>index.php?lang=<?= $lang === 'ko' ? 'en' : 'ko' ?>"><?= e(tr($lang, 'lang_btn')) ?></a>
         <?php if ($user !== null): ?>
             <span class="who">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 016-6h4a6 6 0 016 6v1"/></svg>
                 <?= e($user['name']) ?>
             </span>
-            <a class="hbtn" href="login.php?action=logout"><?= e(tr($lang, 'logout')) ?></a>
+            <a class="hbtn" href="<?= e(base_path()) ?>login.php?action=logout"><?= e(tr($lang, 'logout')) ?></a>
         <?php else: ?>
-            <a class="hbtn" href="login.php"><?= e(tr($lang, 'signin')) ?></a>
+            <a class="hbtn" href="<?= e(base_path()) ?>login.php"><?= e(tr($lang, 'signin')) ?></a>
         <?php endif; ?>
     </div>
 </header>
@@ -218,6 +218,7 @@ try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') 
 ?></script>
 <script>
 window.TH = {
+    base: <?= json_encode(base_path()) ?>,
     csrf: <?= json_encode(csrf_token()) ?>,
     hash: <?= json_encode($toolsData['hash']) ?>,
     lang: <?= json_encode($lang) ?>,
@@ -235,6 +236,6 @@ window.TH = {
 };
 </script>
 <?php endif; ?>
-<script src="assets/app.js"></script>
+<script src="<?= e(base_path()) ?>assets/app.js"></script>
 </body>
 </html>

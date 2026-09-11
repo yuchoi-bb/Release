@@ -177,7 +177,7 @@
     function post(url, payload) {
         payload.csrf = window.TH.csrf;
         payload.hash = window.TH.hash;
-        return fetch(url, {
+        return fetch((window.TH.base || '') + url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)

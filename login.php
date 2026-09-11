@@ -16,19 +16,19 @@ $lang = current_lang();
 
 if (($_GET['action'] ?? '') === 'logout') {
     auth_logout();
-    header('Location: index.php');
+    header('Location: ' . base_path() . 'index.php');
     exit;
 }
 
 if (AUTH_MODE !== 'local' || auth_user() !== null) {
-    header('Location: index.php');
+    header('Location: ' . base_path() . 'index.php');
     exit;
 }
 
 $failed = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (auth_login(trim((string)($_POST['id'] ?? '')), (string)($_POST['password'] ?? ''))) {
-        header('Location: index.php');
+        header('Location: ' . base_path() . 'index.php');
         exit;
     }
     $failed = true;
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ToolHub — <?= e(tr($lang, 'login_title')) ?></title>
-<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="<?= e(base_path()) ?>assets/app.css">
 <script>try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') || 'light'; } catch (e) {}</script>
 </head>
 <body>
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>
             <span id="themeLabel"><?= e(tr($lang, 'theme_light')) ?></span>
         </button>
-        <a class="hbtn" href="?lang=<?= $lang === 'ko' ? 'en' : 'ko' ?>"><?= e(tr($lang, 'lang_btn')) ?></a>
+        <a class="hbtn" href="<?= e(base_path()) ?>login.php?lang=<?= $lang === 'ko' ? 'en' : 'ko' ?>"><?= e(tr($lang, 'lang_btn')) ?></a>
     </div>
 </header>
 
@@ -78,12 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <input id="l-pw" name="password" type="password" required autocomplete="current-password"></div>
 
     <button class="btn-login" type="submit"><?= e(tr($lang, 'login_btn')) ?></button>
-    <a class="back" href="index.php"><?= e(tr($lang, 'login_back')) ?></a>
+    <a class="back" href="<?= e(base_path()) ?>index.php"><?= e(tr($lang, 'login_back')) ?></a>
     <p class="hint"><?= e(tr($lang, 'login_hint')) ?></p>
   </form>
 </div>
 
 <footer class="site-footer"><span><?= e(tr($lang, 'footer')) ?></span><span></span></footer>
-<script src="assets/app.js"></script>
+<script src="<?= e(base_path()) ?>assets/app.js"></script>
 </body>
 </html>
