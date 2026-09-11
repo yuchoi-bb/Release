@@ -119,11 +119,10 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
 - `remarks_text` 는 짧은 문구, `remarks_links` 는 링크 목록입니다 — 화면에서는
   같은 "비고" 칸에 위아래로 쌓여 보입니다
 
-### `obs_cache.json` — 배치가 생성
+### `obs_cache.json` - OBS 파일 목록
 
-**이 페이지는 OBS 를 직접 호출하지 않습니다.** 별도 배치가 OBS 를 훑어 아래
-형식으로 만들어 두면 읽기만 합니다. 파일이 없어도 페이지는 뜨고, OBS 에서
-오는 열만 비워집니다.
+**페이지는 OBS 에 직접 접속하지 않습니다.** 이 파일만 읽습니다. 그래서 OBS 에
+새 산출물이 올라가면 이 파일을 다시 만들어야 표에 반영됩니다.
 
 ```json
 {
@@ -136,6 +135,33 @@ php -r "echo password_hash('새비밀번호', PASSWORD_DEFAULT);"
   ]
 }
 ```
+
+`key` 가 `OBS_BASE_URL` 뒤에 붙어 다운로드 주소가 됩니다.
+
+만드는 스크립트가 함께 있습니다.
+
+```bash
+# OBS 가 마운트되어 있거나 파일이 디렉터리에 있을 때
+node scripts/make-obs-cache.mjs --dir /mnt/obs/release data/obs_cache.json
+
+# 파일 이름 목록만 있을 때 (한 줄에 하나)
+node scripts/make-obs-cache.mjs --list files.txt data/obs_cache.json
+```
+
+목록은 어떻게 뽑아도 됩니다. S3 계열이면
+`aws s3 ls s3://버킷/release/ | awk '{print $4}' > files.txt` 같은 식입니다.
+목록 모드는 크기와 날짜를 알 수 없어 그 자리가 비어 보이지만, 매칭과 다운로드
+링크는 정상 동작합니다.
+
+cron 에 걸어두면 손이 갈 일이 없습니다.
+
+```cron
+*/10 * * * * cd /var/www/html/release && node scripts/make-obs-cache.mjs --dir /mnt/obs/release data/obs_cache.json
+```
+
+파일이 없거나 비어 있어도 페이지는 정상적으로 뜨고, OBS 에서 오는 열만
+"OBS 에 산출물 없음" 으로 비워집니다. `node scripts/validate.mjs` 가 어떤
+`obs_prefix` 가 안 잡히는지 알려줍니다.
 
 ## 매칭 규칙
 
