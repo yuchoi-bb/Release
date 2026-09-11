@@ -117,8 +117,6 @@ try { document.documentElement.dataset.theme = localStorage.getItem('th_theme') 
             <tr data-id="<?= e($t['id']) ?>">
                 <td><span class="tool-name"><?= e($t['tool']) ?></span></td>
 
-                <td class="dim"><?= $row['updated'] ? e(fmt_date($row['updated'])) : '<span class="empty">—</span>' ?></td>
-
                 <td><?= $t['os_supported'] ? e(implode(', ', $t['os_supported'])) : '<span class="empty">—</span>' ?></td>
 
                 <td>

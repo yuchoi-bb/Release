@@ -108,7 +108,7 @@ function obs_match(array $tools, array $files): array
  * 한 도구의 파일들을 화면에 필요한 형태로 정리합니다.
  * 파일명에 버전이 없으면 히스토리를 만들 수 없으므로 업로드 시각 순으로만 세웁니다.
  *
- * @return array{latest: ?array, older: array<int,array>, report: ?array, updated: ?string}
+ * @return array{latest: ?array, older: array<int,array>, report: ?array}
  */
 function obs_summarize(array $files): array
 {
@@ -140,7 +140,6 @@ function obs_summarize(array $files): array
         'latest'  => $binaries[0] ?? null,
         'older'   => array_slice($binaries, 1),
         'report'  => $reports[0] ?? null,
-        'updated' => $binaries[0]['last_modified'] ?? null,
     ];
 }
 
