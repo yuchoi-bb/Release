@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-05-15T02:10:01Z",
+  "files": [
+    { "key": "release/NWin_x64_v2.1.10.zip",        "filename": "NWin_x64_v2.1.10.zip",        "last_modified": "2026-05-14T10:29:08Z", "size": 12927610 },
+    { "key": "release/NWin_x64_v2.1.9.zip",         "filename": "NWin_x64_v2.1.9.zip",         "last_modified": "2026-03-02T08:11:45Z", "size": 12810244 },
+    { "key": "release/NWin_x64_v2.1.8.zip",         "filename": "NWin_x64_v2.1.8.zip",         "last_modified": "2026-02-11T02:20:00Z", "size": 12799001 },
+    { "key": "release/NWin_x64_v2.0.4.zip",         "filename": "NWin_x64_v2.0.4.zip",         "last_modified": "2026-01-05T11:03:22Z", "size": 12480110 },
+    { "key": "release/NWin_x64_v2.0.1.zip",         "filename": "NWin_x64_v2.0.1.zip",         "last_modified": "2025-12-14T09:45:10Z", "size": 12377400 },
+    { "key": "release/NWin_x64_v1.9.0.zip",         "filename": "NWin_x64_v1.9.0.zip",         "last_modified": "2025-11-20T01:02:03Z", "size": 11204410 },
+    { "key": "release/NWin_x64_v1.8.2.zip",         "filename": "NWin_x64_v1.8.2.zip",         "last_modified": "2025-10-02T04:18:55Z", "size": 11100002 },
+    { "key": "release/NWin_x64_v2.1.10_report.pdf", "filename": "NWin_x64_v2.1.10_report.pdf", "last_modified": "2026-05-14T10:31:00Z", "size": 402118 },
+    { "key": "release/NLinux_v3.0.14.zip",          "filename": "NLinux_v3.0.14.zip",          "last_modified": "2026-05-14T10:29:08Z", "size": 17944422 },
+    { "key": "release/NLinux_v3.0.2.zip",           "filename": "NLinux_v3.0.2.zip",           "last_modified": "2026-01-09T05:40:12Z", "size": 17510008 }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-05-15T02:10:01Z",
+  "tools": [
+    {
+      "id": "nwin",
+      "tool": "NWin",
+      "obs_prefix": "NWin_",
+      "remarks_text": "",
+      "os_supported": [
+        "Windows (x64, x86, arm64)"
+      ],
+      "product_supported": [
+        "PM1743"
+      ],
+      "manual": [
+        {
+          "label": "Manual",
+          "url": "http://edm2.shub.saaa.net/DNWin"
+        }
+      ],
+      "remarks_links": [
+        {
+          "label": "Git Repo x64",
+          "url": "https://github.saaa.net/DNWin"
+        },
+        {
+          "label": "Git Repo x86 / arm64",
+          "url": "https://github.saaa.net/DNWin32"
+        }
+      ],
+      "dev_status": "done"
+    },
+    {
+      "id": "nlinux",
+      "tool": "NLinux",
+      "obs_prefix": "NLinux_",
+      "remarks_text": "Emergency Fix",
+      "os_supported": [
+        "Linux (x64, arm)"
+      ],
+      "product_supported": [
+        "PM17"
+      ],
+      "manual": [
+        {
+          "label": "Manual",
+          "url": "http://verhub.saaa.net/DNLinux"
+        }
+      ],
+      "remarks_links": [
+        {
+          "label": "Git Repo",
+          "url": "https://github.saaa.net/DNLinux"
+        }
+      ],
+      "dev_status": "wip"
+    },
+    {
+      "id": "cits",
+      "tool": "CITs",
+      "obs_prefix": "CITs_",
+      "remarks_text": "",
+      "os_supported": [
+        "Windows (x64)"
+      ],
+      "product_supported": [
+        "PM9A3",
+        "PM1735"
+      ],
+      "manual": [],
+      "remarks_links": [],
+      "dev_status": "hold"
+    }
+  ]
+}

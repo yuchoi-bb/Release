@@ -1,0 +1,13 @@
+# 이 디렉터리는 웹에서 직접 열리면 안 됩니다.
+# tools.history.jsonl 에 "누가 언제 무엇을 바꿨는지"가 전부 들어 있습니다.
+#
+# Apache 전용입니다. nginx 라면 이 파일이 동작하지 않으므로
+# lib/config.php 의 DATA_DIR_EXTERNAL 경로(웹 루트 바깥)를 쓰세요.
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

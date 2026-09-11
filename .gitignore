@@ -1,0 +1,4 @@
+# 런타임에 만들어지는 파일 — 배포본마다 내용이 달라집니다.
+data/tools.json.lock
+data/tools.json.tmp
+data/tools.history.jsonl
